@@ -39,30 +39,60 @@ public class ExcelLib {
 		Row row = sh.getRow(rowNum);
 		String data = row.getCell(colNum).getStringCellValue();
 		return data;
+		
 	}
-
 	
+	public int getRowCount(String sheetNAme) throws EncryptedDocumentException, 
+	InvalidFormatException, IOException{
+			  FileInputStream fis = new FileInputStream(filePath);
+			    Workbook wb = WorkbookFactory.create(fis);
+			    Sheet sh = wb.getSheet(sheetNAme);
+			    int rowNum = sh.getLastRowNum();
+			return rowNum;		
+		}
+	public void setExcelData(String sheetNAme, int rowNum , 
+			int colNum, String data) throws EncryptedDocumentException, 
+			InvalidFormatException, IOException{
+					  FileInputStream fis = new FileInputStream(filePath);
+					    Workbook wb = WorkbookFactory.create(fis);
+					    Sheet sh = wb.getSheet(sheetNAme);
+					    Row row = sh.getRow(rowNum);
+					    FileOutputStream fos = new FileOutputStream(filePath);
+					    Cell cel = row.createCell(colNum);
+					    cel.setCellValue(data);
+					    wb.write(fos);
+					    wb.close();
+					
+				}
 
-	public static void main(String[] args) throws EncryptedDocumentException, InvalidFormatException, IOException {
+
+
+	public static void main(String[] args) throws EncryptedDocumentException,
+			InvalidFormatException, IOException {
+
 		
 		ExcelLib obj = new ExcelLib();
-		String s = obj.getExcelData("kunal", 0, 0);
-		String p = obj.getExcelData("kunal", 0, 1);
-		String k = obj.getExcelData("kunal", 1, 0);
-		String m = obj.getExcelData("kunal", 1, 1);
+		String userName = obj.getExcelData("kunal", 0, 0);
+		String passWord = obj.getExcelData("kunal", 1, 0);
+		String Address = obj.getExcelData("kunal", 2, 0);
+		String phoneNumber = obj.getExcelData("kunal", 0, 1);
+		String rollNumber = obj.getExcelData("kunal",1,1);
+		String salary = obj.getExcelData("kunal", 2, 1);
 		
 		
-		System.out.println(s);
-		System.out.println(p);
-		System.out.println(k);
-		System.out.println(m);
+		System.out.println(userName);
+		System.out.println(passWord);
+		System.out.println(Address);
+		System.out.println(phoneNumber);
+		System.out.println(rollNumber);
+		System.out.println(salary);
 		
-		WebDriver driver = new FirefoxDriver();
-		driver.get("https://www.facebook.com");
-		driver.findElement(By.id("email")).sendKeys(s);
-		driver.findElement(By.id("pass")).sendKeys(p);
-		
-		
+
+//		WebDriver driver = new FirefoxDriver();
+//		driver.get("https://www.facebook.com");
+//		driver.findElement(By.id("email")).sendKeys(userName);
+//		driver.findElement(By.id("pass")).sendKeys(passWord);
+
 	}
-	
+
 }
