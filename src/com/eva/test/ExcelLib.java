@@ -89,6 +89,10 @@ public class ExcelLib {
 		System.out.println("kunal");
 		System.out.println("nothing");
 		
+		obj.setExcelData("kunal", 0, 2, "I am Kunal");
+		obj.setExcelData("kunal", 1, 2, "I am ");
+		obj.setExcelData("kunal", 2, 2, "I");
+		
 		
 
 //		WebDriver driver = new FirefoxDriver();
