@@ -7,6 +7,7 @@ import java.io.IOException;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -37,8 +38,13 @@ public class ExcelLib {
 		Workbook wb = WorkbookFactory.create(fis);
 		Sheet sh = wb.getSheet(sheetNAme);
 		Row row = sh.getRow(rowNum);
-		String data = row.getCell(colNum).getStringCellValue();
-		return data;
+//		String data = row.getCell(colNum).getStringCellValue();
+		DataFormatter formatter = new DataFormatter();
+		String val = formatter.formatCellValue(sh.getRow(colNum).getCell(rowNum));
+		
+		return val;
+		
+		
 		
 	}
 	
@@ -74,7 +80,7 @@ public class ExcelLib {
 		ExcelLib obj = new ExcelLib();
 		String userName = obj.getExcelData("kunal", 0, 0);
 		String passWord = obj.getExcelData("kunal", 1, 0);
-		String Address = obj.getExcelData("kunal", 2, 0);
+		String Address =  obj.getExcelData("kunal", 2, 0);
 		String phoneNumber = obj.getExcelData("kunal", 0, 1);
 		String rollNumber = obj.getExcelData("kunal",1,1);
 		String salary = obj.getExcelData("kunal", 2, 1);
@@ -88,10 +94,10 @@ public class ExcelLib {
 		System.out.println(salary);
 		System.out.println("kunal");
 		System.out.println("nothing");
-		
-		obj.setExcelData("kunal", 0, 2, "I am Kunal");
-		obj.setExcelData("kunal", 1, 2, "I am ");
-		obj.setExcelData("kunal", 2, 2, "I");
+//		
+//		obj.setExcelData("kunal", 0, 2, "I am Kunal");
+//		obj.setExcelData("kunal", 1, 2, "I am ");
+//		obj.setExcelData("kunal", 2, 2, "I");
 		
 		
 
